@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Results - Answer Sheet Evaluator</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+	<div class="container">
+		<h1>Results</h1>
+		<p class="summary">Score: {{ score }} / {{ total }} ({{ percent }}%)</p>
+		<table class="results">
+			<thead>
+				<tr>
+					<th>Question</th>
+					<th>Your Answer</th>
+					<th>Correct Answer</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for r in results %}
+				<tr class="{% if r.is_correct %}correct{% else %}incorrect{% endif %}">
+					<td>{{ r.question }}</td>
+					<td>{{ r.given|default:'-' }}</td>
+					<td>{{ r.correct }}</td>
+					<td>{% if r.is_correct %}Correct{% else %}Incorrect{% endif %}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<p><a class="button" href="/">Evaluate another sheet</a></p>
+	</div>
+	<script src="/static/main.js"></script>
+</body>
+</html>
