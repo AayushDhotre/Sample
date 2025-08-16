@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Answer Sheet Evaluator</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+	<div class="container">
+		<h1>Answer Sheet Evaluator</h1>
+		<form method="post" action="{% url 'evaluate' %}">
+			{% csrf_token %}
+			<div class="questions">
+				{% for q in questions %}
+					<div class="question">
+						<label for="id_{{ q }}">{{ q }}</label>
+						<input id="id_{{ q }}" name="answers[{{ q }}]" placeholder="Enter A/B/C/D" required />
+					</div>
+				{% endfor %}
+			</div>
+			<button type="submit">Evaluate</button>
+		</form>
+	</div>
+	<script src="/static/main.js"></script>
+</body>
+</html>
